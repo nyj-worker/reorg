@@ -639,8 +639,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const fontResetAllBtn = document.getElementById('fontResetAllBtn');
   const mobileFontQuickBtn = document.getElementById('mobileFontQuickBtn');
 
-  // 현재 글자 크기 배율 (기본 1.25 = 125%, 범위 0.75 ~ 1.50)
-  let currentFontScale = parseFloat(localStorage.getItem('nyj_wiki_font_scale_v2')) || 1.25;
+  // 기기별 기본 글자 배율: 모바일(<=768px)은 100%, 데스크탑은 110%
+  function getDefaultFontScale() {
+    return window.innerWidth <= 768 ? 1.0 : 1.10;
+  }
+
+  const fontStorageKey = window.innerWidth <= 768 ? 'nyj_wiki_font_scale_m_v4' : 'nyj_wiki_font_scale_d_v4';
+  let currentFontScale = parseFloat(localStorage.getItem(fontStorageKey)) || getDefaultFontScale();
   let currentLineHeight = parseFloat(localStorage.getItem('nyj_wiki_line_height')) || 1.72;
 
   // 초기 폰트 크기 및 줄간격 적용
@@ -672,8 +677,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // 로컬 스토리지에 저장
-    localStorage.setItem('nyj_wiki_font_scale_v2', scale);
+    // 로컬 스토리지에 저장 (기기별 분리 저장)
+    const currentKey = window.innerWidth <= 768 ? 'nyj_wiki_font_scale_m_v4' : 'nyj_wiki_font_scale_d_v4';
+    localStorage.setItem(currentKey, scale);
 
     if (showToastMessage) {
       showToast(`글자 크기: ${percent}%`);
@@ -785,12 +791,13 @@ document.addEventListener('DOMContentLoaded', () => {
     lhWideBtn.addEventListener('click', () => applyLineHeight(1.90, true));
   }
 
-  // 전체 초기화
+  // 전체 초기화 (데스크탑 110%, 모바일 100% 자동 분기 리셋)
   if (fontResetAllBtn) {
     fontResetAllBtn.addEventListener('click', () => {
-      applyFontScale(1.25, false);
+      const defaultScale = getDefaultFontScale();
+      applyFontScale(defaultScale, false);
       applyLineHeight(1.72, false);
-      showToast('글자 크기와 줄 간격이 기본값(125%)으로 초기화되었습니다.');
+      showToast(`글자 크기와 줄 간격이 기본값(${Math.round(defaultScale * 100)}%)으로 초기화되었습니다.`);
     });
   }
 
