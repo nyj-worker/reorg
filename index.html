@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>남양주시 2026년 조직개편 자치법규 입법예고 심층 위키 뷰어</title>
+  <meta name="description" content="남양주시 2026년 하반기 조직개편 자치법규(행정기구설치 조례, 지방공무원정원 조례 등 6종) 입법예고 종합분석 및 위키 심층 뷰어">
+  <meta name="keywords" content="남양주시, 조직개편, 시민주권과, 아파트과, 지방공무원정원, 입법예고, 행정기구">
+  <meta property="og:title" content="남양주시 2026년 조직개편 자치법규 입법예고 심층 뷰어">
+  <meta property="og:description" content="시민주권과 신설, 아파트과 명칭 변경, 총 51명 정원 증원 등 남양주시 조직개편 상세 분석">
+  <meta property="og:type" content="article">
+  
+  <!-- 웹폰트: Pretendard -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <!-- FontAwesome 아이콘 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-medium">
+
+  <!-- ==========================================================================
+       1. 상단 글로벌 네비게이션 헤더
+       ========================================================================== -->
+  <header class="app-header" id="appHeader">
+    <div class="header-left">
+      <button class="menu-toggle-btn" id="sidebarToggleBtn" aria-label="메뉴 열기/닫기">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <a href="#top" class="brand-logo" aria-label="홈으로">
+        <span class="brand-icon">N</span>
+        <span>남양주위키</span>
+        <span class="brand-badge">2026 조직개편</span>
+      </a>
+    </div>
+
+    <div class="header-center">
+      <div class="search-trigger-box" id="headerSearchTrigger">
+        <div class="search-trigger-left">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>문서 내 실시간 검색 및 조례 찾기...</span>
+        </div>
+        <kbd class="search-kbd">Ctrl + K</kbd>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <!-- 정밀 글자 크기 조절 컨트롤러 (Font Size Stepper) -->
+      <div class="font-size-stepper-box" id="fontSizeStepperBox">
+        <button class="font-step-btn" id="fontDecreaseBtn" title="글자 축소 (A-)" aria-label="글자 축소">
+          <i class="fa-solid fa-minus"></i>
+        </button>
+        <button class="font-size-display-btn" id="fontSizePopoverToggleBtn" title="글자 크기 및 줄간격 상세 설정 열기" aria-label="글자 크기 상세 설정">
+          <i class="fa-solid fa-font"></i>
+          <span id="fontSizeDisplay">100%</span>
+        </button>
+        <button class="font-step-btn" id="fontIncreaseBtn" title="글자 확대 (A+)" aria-label="글자 확대">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+
+        <!-- 글자 크기 상세 설정 드롭다운 팝오버 -->
+        <div class="font-settings-popover" id="fontSettingsPopover" role="dialog" aria-label="글자 크기 및 줄간격 설정">
+          <div class="popover-header">
+            <span><i class="fa-solid fa-sliders"></i> 텍스트 가독성 설정</span>
+            <button class="popover-close-btn" id="fontPopoverCloseBtn" aria-label="닫기">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          
+          <div class="popover-body">
+            <!-- 프리셋 버튼들 -->
+            <div class="popover-section">
+              <label class="popover-label">글자 크기 프리셋</label>
+              <div class="font-preset-grid">
+                <button class="preset-btn" data-scale="0.85">85% 작게</button>
+                <button class="preset-btn active" data-scale="1.0">100% 보통</button>
+                <button class="preset-btn" data-scale="1.15">115% 크게</button>
+                <button class="preset-btn" data-scale="1.30">130% 더크게</button>
+                <button class="preset-btn" data-scale="1.45">145% 최대</button>
+              </div>
+            </div>
+
+            <!-- 정밀 슬라이더 -->
+            <div class="popover-section">
+              <div class="slider-label-row">
+                <label class="popover-label" for="fontSizeSlider">세밀 조절 (75% ~ 150%)</label>
+                <span class="slider-val-badge" id="sliderValueBadge">100%</span>
+              </div>
+              <input type="range" id="fontSizeSlider" min="75" max="150" step="5" value="100" class="font-slider">
+            </div>
+
+            <!-- 줄 간격(행간) 조절 -->
+            <div class="popover-section">
+              <label class="popover-label">줄 간격 (가독성)</label>
+              <div class="line-height-toggle-box">
+                <button class="lh-toggle-btn active" id="lhNormalBtn" data-lh="1.65">보통 (1.65)</button>
+                <button class="lh-toggle-btn" id="lhWideBtn" data-lh="1.9">넓게 (1.90)</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="popover-footer">
+            <button class="popover-reset-btn" id="fontResetAllBtn">
+              <i class="fa-solid fa-rotate-left"></i> 기본값으로 초기화
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 테마 토글 (다크/라이트) -->
+      <button class="icon-btn" id="themeToggleBtn" title="다크 모드 전환" aria-label="테마 전환">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <!-- 모바일 검색 버튼 -->
+      <button class="icon-btn mobile-search-btn" id="mobileSearchBtn" title="검색 열기" aria-label="검색">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       2. 전체 애플리케이션 레이아웃
+       ========================================================================== -->
+  <div class="app-layout" id="top">
+    
+    <!-- 모바일 사이드바 배경 오버레이 -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- --------------------------------------------------------------------------
+         좌측 계층형 인터랙티브 트리 사이드바
+         -------------------------------------------------------------------------- -->
+    <aside class="sidebar" id="sidebarNav" aria-label="문서 목차 내비게이션">
+      <div class="sidebar-header">
+        <span class="sidebar-title"><i class="fa-solid fa-sitemap"></i> 문서 계층 구조</span>
+        <div class="sidebar-actions">
+          <button class="tree-action-btn" id="expandAllTreeBtn" title="전체 펼치기">모두 펼침</button>
+          <button class="tree-action-btn" id="collapseAllTreeBtn" title="전체 접기">모두 접음</button>
+        </div>
+      </div>
+
+      <nav class="tree-container" id="treeContainer">
+        <!-- 트리 노드: 핵심 대시보드 -->
+        <div class="tree-node">
+          <div class="tree-item" data-target="dashboardSection">
+            <div class="tree-item-content">
+              <span class="tree-icon"><i class="fa-solid fa-gauge-high"></i></span>
+              <span>핵심 요약 대시보드</span>
+            </div>
+            <span class="tree-badge">요약</span>
+          </div>
+        </div>
+
+        <!-- 트리 노드 1: Ⅰ. 추진 배경 및 개요 -->
+        <div class="tree-node expanded">
+          <div class="tree-item" data-target="sec-1">
+            <div class="tree-item-content">
+              <span class="tree-icon tree-chevron"><i class="fa-solid fa-chevron-right"></i></span>
+              <span>Ⅰ. 추진 배경 및 개요</span>
+            </div>
+            <span class="tree-badge">개요</span>
+          </div>
+          <div class="tree-children">
+            <div class="tree-child-item" data-target="sec-1-1">1. 추진 목적 및 배경</div>
+            <div class="tree-child-item" data-target="sec-1-2">2. 입법예고 개요 및 절차</div>
+          </div>
+        </div>
+
+        <!-- 트리 노드 2: Ⅱ. 자치법규 개정안별 주요 내용 -->
+        <div class="tree-node expanded">
+          <div class="tree-item" data-target="sec-2">
+            <div class="tree-item-content">
+              <span class="tree-icon tree-chevron"><i class="fa-solid fa-chevron-right"></i></span>
+              <span>Ⅱ. 자치법규 개정안 총괄</span>
+            </div>
+            <span class="tree-badge">6종</span>
+          </div>
+          <div class="tree-children">
+            <div class="tree-child-item" data-target="sec-2-1">조례안 3건 비교 (기구·정원·위임)</div>
+            <div class="tree-child-item" data-target="sec-2-2">규칙안 3건 비교 (기구규칙·정원규칙·전결)</div>
+          </div>
+        </div>
+
+        <!-- 트리 노드 3: Ⅲ. 기구 및 기능 개편 심층 분석 -->
+        <div class="tree-node expanded">
+          <div class="tree-item" data-target="sec-3">
+            <div class="tree-item-content">
+              <span class="tree-icon tree-chevron"><i class="fa-solid fa-chevron-right"></i></span>
+              <span>Ⅲ. 기구 및 기능 개편 분석</span>
+            </div>
+            <span class="tree-badge">핵심</span>
+          </div>
+          <div class="tree-children">
+            <div class="tree-child-item" data-target="sec-3-1">1. 시민주권과 신설 & 소통기능 재편</div>
+            <div class="tree-child-item" data-target="sec-3-2">2. 아파트과 개칭 & 공동주택 일원화</div>
+            <div class="tree-child-item" data-target="sec-3-3">3. 부서별 세부 분장사무 조정</div>
+            <div class="tree-child-item" data-target="sec-3-compare">4. 신·구 조직 구조 비교 위젯</div>
+          </div>
+        </div>
+
+        <!-- 트리 노드 4: Ⅳ. 공무원 정원 변동 및 재정 소요 -->
+        <div class="tree-node expanded">
+          <div class="tree-item" data-target="sec-4">
+            <div class="tree-item-content">
+              <span class="tree-icon tree-chevron"><i class="fa-solid fa-chevron-right"></i></span>
+              <span>Ⅳ. 정원 변동 및 재정 분석</span>
+            </div>
+            <span class="tree-badge">+51명</span>
+          </div>
+          <div class="tree-children">
+            <div class="tree-child-item" data-target="sec-4-1">1. 총괄 정원 증감 현황</div>
+            <div class="tree-child-item" data-target="sec-4-2">2. 직급별 정원 변동 (실무직 중심)</div>
+            <div class="tree-child-item" data-target="sec-4-3">3. 기관별 정원 배분 현황</div>
+            <div class="tree-child-item" data-target="sec-4-4">4. 비용추계 및 한시정원 연장</div>
+          </div>
+        </div>
+
+        <!-- 트리 노드 5: Ⅴ. 사무위임 및 사무전결 개편 -->
+        <div class="tree-node">
+          <div class="tree-item" data-target="sec-5">
+            <div class="tree-item-content">
+              <span class="tree-icon tree-chevron"><i class="fa-solid fa-chevron-right"></i></span>
+              <span>Ⅴ. 사무위임 & 전결 개편</span>
+            </div>
+          </div>
+          <div class="tree-children">
+            <div class="tree-child-item" data-target="sec-5-1">1. 사무위임 조례 (GB 단속 등)</div>
+            <div class="tree-child-item" data-target="sec-5-2">2. 사무전결처리 규칙 및 엑셀 전결표</div>
+          </div>
+        </div>
+
+        <!-- 트리 노드 6: Ⅵ. 일정 및 향후 추진 계획 -->
+        <div class="tree-node">
+          <div class="tree-item" data-target="sec-6">
+            <div class="tree-item-content">
+              <span class="tree-icon tree-chevron"><i class="fa-solid fa-chevron-right"></i></span>
+              <span>Ⅵ. 입법예고 일정 & 절차</span>
+            </div>
+          </div>
+          <div class="tree-children">
+            <div class="tree-child-item" data-target="sec-6-1">1. 향후 5단계 추진 절차</div>
+            <div class="tree-child-item" data-target="sec-6-2">2. 의견 제출 안내 및 문의처</div>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- --------------------------------------------------------------------------
+         중앙 메인 위키 콘텐츠 아티클
+         -------------------------------------------------------------------------- -->
+    <main class="main-wrapper">
+      <article class="main-article">
+        
+        <!-- 위키 표제어 헤더 -->
+        <div class="article-header">
+          <div class="article-category">
+            <i class="fa-solid fa-landmark"></i>
+            <span>남양주시 자치법규 입법예고 심층 보고서</span>
+          </div>
+          <h1 class="article-title">남양주시 2026년 조직개편 자치법규 입법예고</h1>
+          <p class="article-subtitle">
+            시민 중심 행정기반 마련과 민선 9기 역점사업 및 국가정책사업의 체계적 추진을 위한 행정기구 설치 조례 및 지방공무원정원 조례 등 6대 자치법규 일부개정 종합 분석
+          </p>
+          <div class="article-meta">
+            <div class="meta-item"><i class="fa-regular fa-calendar"></i> <strong>예고기간:</strong> 2026. 9. 17. ~ 10. 7. (20일간)</div>
+            <div class="meta-item"><i class="fa-solid fa-building"></i> <strong>소관부서:</strong> 정책기획과 조직관리팀</div>
+            <div class="meta-item"><i class="fa-solid fa-file-signature"></i> <strong>공고번호:</strong> 남양주시 공고 제2026-2036호~2041호</div>
+          </div>
+        </div>
+
+        <!-- ----------------------------------------------------------------------
+             상단 전폭 대시보드: 2026 조직개편 3대 핵심 요약
+             ---------------------------------------------------------------------- -->
+        <section class="summary-dashboard" id="dashboardSection">
+          <div class="dashboard-title-box">
+            <div class="dashboard-title">
+              <i class="fa-solid fa-sparkles" style="color: #f59e0b;"></i>
+              <span>2026 조직개편 3대 핵심 요약</span>
+            </div>
+            <span class="dashboard-badge">핵심 포인트</span>
+          </div>
+
+          <div class="highlights-grid">
+            <!-- 카드 1 -->
+            <div class="highlight-card" onclick="document.getElementById('sec-3-1').scrollIntoView({behavior: 'smooth'})">
+              <div class="card-num">Point 01</div>
+              <div class="card-title">시민주권과 신설 &amp; 소통기능 재편</div>
+              <div class="card-desc">
+                시장 직속 '시민시장담당관'을 폐지하고, 행정국 내 <strong>'시민주권과'</strong>를 신설하여 기본사회, 헌법친화도시, 자살예방 총괄, 인권 및 특이민원 대응을 총괄합니다.
+              </div>
+              <div class="card-tags">
+                <span class="tag-pill">시민주권과</span>
+                <span class="tag-pill">기본사회</span>
+                <span class="tag-pill">특이민원 대응</span>
+              </div>
+            </div>
+
+            <!-- 카드 2 -->
+            <div class="highlight-card" onclick="document.getElementById('sec-3-2').scrollIntoView({behavior: 'smooth'})">
+              <div class="card-num">Point 02</div>
+              <div class="card-title">아파트과 개칭 &amp; 공동주택 일원화</div>
+              <div class="card-desc">
+                도시국 '주택과'를 <strong>'아파트과'</strong>로 직관적으로 변경하고, 건축관리과에 있던 공동주택 관리·감사·지원 일체 업무를 흡수하여 주거행정을 원스톱 일원화합니다.
+              </div>
+              <div class="card-tags">
+                <span class="tag-pill">아파트과</span>
+                <span class="tag-pill">공동주택 감사</span>
+                <span class="tag-pill">GB 단속 분리</span>
+              </div>
+            </div>
+
+            <!-- 카드 3 -->
+            <div class="highlight-card" onclick="document.getElementById('sec-4').scrollIntoView({behavior: 'smooth'})">
+              <div class="card-num">Point 03</div>
+              <div class="card-title">공무원 정원 +51명 실무인력 순증</div>
+              <div class="card-desc">
+                총 정원이 <strong>2,436명에서 2,487명</strong>으로 51명 증원되며, 고위직 증원 없이 <strong>6~8급 실무직에 100% 배정</strong>되어 현장 대민서비스를 집중 보강합니다.
+              </div>
+              <div class="card-tags">
+                <span class="tag-pill">총 2,487명</span>
+                <span class="tag-pill">실무직 100%</span>
+                <span class="tag-pill">연 31.9억</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             Ⅰ. 추진 배경 및 개요 (좌측 상세 본문 + 우측 위키 인포박스 결합)
+             ---------------------------------------------------------------------- -->
+        <section class="content-section" id="sec-1">
+          <div class="section-header">
+            <h2 class="section-title">Ⅰ. 추진 배경 및 개요</h2>
+            <a href="#sec-1" class="section-anchor"><i class="fa-solid fa-link"></i></a>
+          </div>
+
+          <div class="sec-intro-layout">
+            <!-- 좌측 개요 본문 내용 -->
+            <div class="sec-intro-text">
+              <div class="sub-section" id="sec-1-1">
+                <h3 class="sub-title">1. 추진 목적 및 배경</h3>
+                <p class="content-para">
+                  남양주시는 대규모 신도시(3기 신도시 왕숙지구 등) 개발과 지속적인 인구 유입에 따라 행정서비스 기능의 확대와 현장 대민 행정수요에 선제적으로 대응할 필요성이 크게 증대되었습니다.
+                </p>
+                <ul class="official-list">
+                  <li class="level-1">국가정책사업 및 민선 9기 시정 역점사업의 체계적·효율적 추진을 위한 행정기반 마련</li>
+                  <li class="level-1">시민소통 창구를 일원화하고, 기본사회 및 인권 보호, 특이민원 피해공무원 보호 등 시민주권 중심의 행정 실현</li>
+                  <li class="level-1">아파트 거주 비율이 압도적인 시 특성을 반영하여 공동주택 관리 및 감사 기능을 하나로 통합하는 전문 행정체계 구축</li>
+                  <li class="level-1">과도한 고위직 증원을 지양하고 대민 접점인 6~8급 실무인력을 대폭 확충하여 실질적인 일하는 조직 구현</li>
+                </ul>
+              </div>
+
+              <div class="sub-section" id="sec-1-2" style="margin-top: 24px;">
+                <h3 class="sub-title">2. 입법예고 개요 및 절차</h3>
+                <div class="callout-box info">
+                  <div class="callout-title"><i class="fa-solid fa-circle-info"></i> 입법예고 공고 현황</div>
+                  남양주시장은 「남양주시 자치법규안 입법예고 조례」 제2조에 따라 2026년 9월 17일부터 10월 7일까지 20일간 6건의 자치법규 개정안(공고 제2026-2036호 ~ 제2026-2041호)을 일괄 입법예고하였습니다.
+                </div>
+              </div>
+            </div>
+
+            <!-- 우측 위키 인포박스 -->
+            <aside class="wiki-infobox" aria-label="기본 정보 인포박스">
+              <div class="infobox-header">남양주시 자치법규 개정안</div>
+              <div class="infobox-subheader">2026년 하반기 조직개편 패키지</div>
+              <table class="infobox-table">
+                <tbody>
+                  <tr>
+                    <th>자치단체</th>
+                    <td>경기도 남양주시</td>
+                  </tr>
+                  <tr>
+                    <th>입법예고 기간</th>
+                    <td>2026. 9. 17. ~ 10. 7.</td>
+                  </tr>
+                  <tr>
+                    <th>총 정원 변동</th>
+                    <td><strong>2,436명 ➔ 2,487명</strong><br><span class="badge-plus">+51명 (+2.09%)</span></td>
+                  </tr>
+                  <tr>
+                    <th>증원 직급</th>
+                    <td>일반직 6급(5), 7급(18), 8급(28)<br><em>* 간부직 증원 없음</em></td>
+                  </tr>
+                  <tr>
+                    <th>신설 부서</th>
+                    <td><strong>행정국 시민주권과</strong></td>
+                  </tr>
+                  <tr>
+                    <th>폐지 부서</th>
+                    <td>시민시장담당관 (시장 직속)</td>
+                  </tr>
+                  <tr>
+                    <th>명칭 변경</th>
+                    <td>도시국 <strong>주택과 ➔ 아파트과</strong></td>
+                  </tr>
+                  <tr>
+                    <th>기능 이관</th>
+                    <td>공동주택 관리·감사 일원화<br>(건축관리과 ➔ 아파트과)</td>
+                  </tr>
+                  <tr>
+                    <th>소요 예산</th>
+                    <td>연간 약 3,194백만 원 (인건비)</td>
+                  </tr>
+                  <tr>
+                    <th>한시정원</th>
+                    <td>미래도시추진단 4급 (2030년까지)</td>
+                  </tr>
+                  <tr>
+                    <th>시행 일자</th>
+                    <td>공포 후 첫 인사발령일</td>
+                  </tr>
+                </tbody>
+              </table>
+            </aside>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             Ⅱ. 자치법규 개정안 총괄
+             ---------------------------------------------------------------------- -->
+        <section class="content-section" id="sec-2">
+          <div class="section-header">
+            <h2 class="section-title">Ⅱ. 자치법규 개정안별 주요 내용 총괄</h2>
+            <a href="#sec-2" class="section-anchor"><i class="fa-solid fa-link"></i></a>
+          </div>
+
+          <p class="content-para">
+            이번 조직개편 패키지는 시의회 의결을 요하는 <strong>조례안 3건</strong>과 시장 권한으로 공포되는 <strong>규칙안 3건</strong>으로 유기적으로 구성되어 있습니다.
+          </p>
+
+          <div class="table-responsive">
+            <table class="wiki-table">
+              <thead>
+                <tr>
+                  <th style="width: 10%;">구분</th>
+                  <th style="width: 25%;">자치법규명</th>
+                  <th style="width: 15%;">공고번호</th>
+                  <th style="width: 50%;">핵심 개정 골자</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="sec-2-1">
+                  <td class="text-center font-bold">조례안</td>
+                  <td><strong>남양주시 행정기구설치 조례 일부개정조례안</strong></td>
+                  <td class="text-center">제2026-2036호</td>
+                  <td>
+                    • 보좌기관 시민시장담당관 폐지 (제5조)<br>
+                    • 행정국 내 <strong>시민주권과</strong> 신설 (제6조의2)<br>
+                    • 도시국 <strong>주택과 ➔ 아파트과</strong> 변경 (제9조)<br>
+                    • 미래도시추진단 4급 한시정원 기한 2030년까지 연장
+                  </td>
+                </tr>
+                <tr id="sec-2-2">
+                  <td class="text-center font-bold">규칙안</td>
+                  <td><strong>남양주시 행정기구설치 조례 시행규칙 일부개정규칙안</strong></td>
+                  <td class="text-center">제2026-2037호</td>
+                  <td>
+                    • 기구 신설·폐지에 따른 직급표 개정 (별표1)<br>
+                    • 부서별 분장사무 전면 정비 (별표7: 본청, 별표8: 보건소, 별표9: 사업소)<br>
+                    • 공동주택 관리/감사 일체 사무 아파트과로 이관
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center font-bold">조례안</td>
+                  <td><strong>남양주시 지방공무원정원 조례 일부개정조례안</strong></td>
+                  <td class="text-center">제2026-2038호</td>
+                  <td>
+                    • 총 정원: <strong>2,436명 ➔ 2,487명 (+51명 증원)</strong><br>
+                    • 집행기관 정원: 2,396명 ➔ 2,447명 (+51명)<br>
+                    • 6급 이하 일반직 정원 증원 및 1년간 비용추계(31.94억) 반영
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center font-bold">규칙안</td>
+                  <td><strong>남양주시 지방공무원정원 규칙 일부개정규칙안</strong></td>
+                  <td class="text-center">제2026-2039호</td>
+                  <td>
+                    • 기관별·직급별·직렬별 상세 정원 배분표 정비 (별표1)<br>
+                    • 6급(+5), 7급(+18), 8급(+28) 실무직 세부 배분<br>
+                    • 기술직군 명칭 정비(지방과학기술서기관 등)
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center font-bold">조례안</td>
+                  <td><strong>남양주시 사무위임 조례 일부개정조례안</strong></td>
+                  <td class="text-center">제2026-2040호</td>
+                  <td>
+                    • 위험수목 관리 위임사무 문구 정비 (불필요한 '8272 등' 삭제)<br>
+                    • 개발제한구역(GB) 불법단속 조항 정비 및 본청 일원화<br>
+                    • 읍면동 위임사무 항목 정돈 (별표3)
+                  </td>
+                </tr>
+                <tr>
+                  <td class="text-center font-bold">규칙안</td>
+                  <td><strong>남양주시 사무전결처리 규칙 일부개정규칙안</strong></td>
+                  <td class="text-center">제2026-2041호</td>
+                  <td>
+                    • 신설 부서(시민주권과) 단위사무별 전결권 신설<br>
+                    • 명칭변경 및 사무이관(아파트과)에 따른 전결권 조정<br>
+                    • 별표2, 3, 4, 6 전결대상사무 일제 정비 (별첨 엑셀 반영)
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             Ⅲ. 기구 및 기능 개편 심층 분석
+             ---------------------------------------------------------------------- -->
+        <section class="content-section" id="sec-3">
+          <div class="section-header">
+            <h2 class="section-title">Ⅲ. 기구 및 기능 개편 심층 분석</h2>
+            <a href="#sec-3" class="section-anchor"><i class="fa-solid fa-link"></i></a>
+          </div>
+
+          <!-- 인터랙티브 비교 위젯 -->
+          <div class="compare-widget" id="sec-3-compare">
+            <div class="compare-tabs">
+              <button class="compare-tab-btn active" data-pane="pane-org">조직 구조 변화 (신·구 대비)</button>
+              <button class="compare-tab-btn" data-pane="pane-tasks">주요 사무 이관 흐름</button>
+            </div>
+
+            <!-- 탭 1: 조직 구조 -->
+            <div class="compare-pane active" id="pane-org">
+              <div class="compare-columns">
+                <div class="compare-col col-before">
+                  <div class="compare-col-header">
+                    <span><i class="fa-solid fa-clock-rotate-left"></i> 기존 조직 체계</span>
+                    <span>현행</span>
+                  </div>
+                  <ul class="compare-item-list">
+                    <li class="deleted">시장 직속 「시민시장담당관」 (소통/민원 혼재)</li>
+                    <li>행정국: 행정지원과, 자치협력과, 민원여권과, 회계과, 재산관리과</li>
+                    <li class="deleted">도시국 「주택과」 (공동주택 관리는 타 과에 분산)</li>
+                    <li>도시국 「건축관리과」 (건축안전 + 공동주택 관리/감사 + GB단속)</li>
+                  </ul>
+                </div>
+                <div class="compare-col col-after">
+                  <div class="compare-col-header">
+                    <span><i class="fa-solid fa-arrow-right-arrow-left"></i> 개편 후 조직 체계</span>
+                    <span>개정안</span>
+                  </div>
+                  <ul class="compare-item-list">
+                    <li class="deleted">시민시장담당관 폐지 ➔ 기능 전문 분화</li>
+                    <li class="created">행정국 내 「시민주권과」 신설 (정책·소통·기본사회)</li>
+                    <li class="modified">행정국 「민원여권과」 (현장기동반·콜센터 흡수)</li>
+                    <li class="created">도시국 「아파트과」 개칭 &amp; 공동주택 관리 완전 통합</li>
+                    <li class="modified">도시국 「건축관리과」 (건축안전센터 + GB 불법단속 전담)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- 탭 2: 사무 이관 흐름 -->
+            <div class="compare-pane" id="pane-tasks">
+              <div class="compare-columns">
+                <div class="compare-col col-before">
+                  <div class="compare-col-header">
+                    <span>이관 전 부서</span>
+                  </div>
+                  <ul class="compare-item-list">
+                    <li><strong>시민시장담당관:</strong> 소통기획, 제안, 바로처리, 콜센터</li>
+                    <li><strong>행정지원과:</strong> 인권업무 총괄</li>
+                    <li><strong>보건소:</strong> 자살예방 종합계획 수립</li>
+                    <li><strong>건축관리과:</strong> 공동주택 관리, 감사, 지원, 안전점검</li>
+                  </ul>
+                </div>
+                <div class="compare-col col-after">
+                  <div class="compare-col-header">
+                    <span>이관 후 부서 (개편)</span>
+                  </div>
+                  <ul class="compare-item-list">
+                    <li class="created"><strong>시민주권과:</strong> 소통 + 인권 + 자살예방기획 + 기본사회 + 특이민원대응</li>
+                    <li class="created"><strong>민원여권과:</strong> 바로처리 현장기동반 + 민원콜센터 총괄</li>
+                    <li class="created"><strong>아파트과:</strong> 공동주택 지원/감독/감사/분쟁조정 일체 흡수</li>
+                    <li class="modified"><strong>건축관리과:</strong> 개발제한구역(GB) 불법행위 단속 및 처분 집중</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 소단원 1: 시민주권과 -->
+          <div class="sub-section" id="sec-3-1">
+            <h3 class="sub-title">1. 시민소통 및 권익 기능 전면 개편</h3>
+            <p class="content-para">
+              기존 시장 직속의 <strong>시민시장담당관을 폐지</strong>하고, 그 권한과 기능을 일반 행정국 체제로 정규 편입하여 <strong>「시민주권과」를 신설</strong>하였습니다.
+            </p>
+            <div class="callout-box info">
+              <div class="callout-title"><i class="fa-solid fa-star"></i> 시민주권과의 5대 핵심 기능군</div>
+              <ul class="official-list">
+                <li class="level-1"><strong>시민소통·참여:</strong> 시민소통 시책 및 소통창구 기획·운영, 시민제안제도, 생활공감정책참여단, 시장 직통 문자서비스, 청원법 및 시민투표 운영</li>
+                <li class="level-1"><strong>기본사회 정책:</strong> 기본사회 종합계획 수립, 정책 시행, 기본사회위원회 구성·운영 및 활성화 사업</li>
+                <li class="level-1"><strong>자살예방 정책 총괄:</strong> 지역 자살예방 종합계획 수립 및 자살예방회의 운영 (보건소에서 정책기능 이관)</li>
+                <li class="level-1"><strong>인권 및 민주사회:</strong> 인권업무 총괄(행정지원과에서 이관), 헌법친화도시 조성·운영, 시민주권센터 및 민주열사공원 건립</li>
+                <li class="level-1"><strong>갈등조정 및 직원보호:</strong> 공공갈등 예방 및 조정, <strong>특이민원 대응 및 피해공무원 보호·지원</strong></li>
+              </ul>
+            </div>
+            <p class="content-para">
+              또한, 기존 시민시장담당관이 맡았던 <strong>생활불편 민원처리 총괄, 바로처리 현장기동반 운영, 민원콜센터 운영</strong> 등 현장 집행 실무는 행정국 <strong>「민원여권과」로 이관</strong>하여 신속한 현장 민원 처리 체계를 구축했습니다.
+            </p>
+          </div>
+
+          <!-- 소단원 2: 아파트과 -->
+          <div class="sub-section" id="sec-3-2">
+            <h3 class="sub-title">2. 주택행정 전문화 및 공동주택 관리 일원화</h3>
+            <p class="content-para">
+              도시국의 <strong>「주택과」를 「아파트과」로 명칭 변경</strong>하고, 그동안 건축관리과 등에 분산되어 있던 공동주택 관련 사무를 전면 흡수·통합하였습니다.
+            </p>
+            <ul class="official-list">
+              <li class="level-1"><strong>아파트과로 통합된 주요 사무:</strong>
+                <ul class="official-list">
+                  <li class="level-2">소규모 공동주택 관리에 관한 지원 조례 운영 및 지원사업, 소규모 공동주택(300세대 미만) 안전점검</li>
+                  <li class="level-2">집합건물의 소유 및 관리에 관한 법률 사항 및 감독</li>
+                  <li class="level-2">주택관리사(보) 자격증 관리, 주택관리업 등록 및 행정처분</li>
+                  <li class="level-2">공동주택 하자보수보증금(하자증권) 관리, 재난배상책임보험, 공동주택 집단민원 사전 조정</li>
+                  <li class="level-2"><strong>공동주택관리 감사 계획 수립·실시·보고</strong>, 공동주택관리 감사단 운영, 위반사항 행정처분 및 감사조례 제·개정</li>
+                </ul>
+              </li>
+              <li class="level-1"><strong>건축관리과 기능 재정립:</strong>
+                <p class="content-para" style="margin-top: 6px;">
+                  공동주택 감사·관리 기능이 아파트과로 넘어가면서, 건축관리과는 <strong>건축물 안전관리, 지역건축안전센터 운영, 개발제한구역(GB) 내 불법행위 단속 및 행정처분 일원화</strong>에 전문 역량을 집중하게 됩니다.
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 소단원 3: 기타 부서 -->
+          <div class="sub-section" id="sec-3-3">
+            <h3 class="sub-title">3. 기타 본청 및 직속기관 기능 조정 내역</h3>
+            <div class="table-responsive">
+              <table class="wiki-table">
+                <thead>
+                  <tr>
+                    <th>기관/부서</th>
+                    <th>조정 전 사무</th>
+                    <th>조정 후 사무 (개편 내용)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>시민안전관</strong></td>
+                    <td>재난 안전 종합관리 등</td>
+                    <td><strong>'각 부서 재난 관련 동향 파악'</strong> 사무 신설(제22호)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>정책기획과</strong></td>
+                    <td>시정연구원 '설립'에 관한 사항</td>
+                    <td>시정연구원 <strong>'운영 지원 및 지도·감독'</strong>으로 변경(설립 완료 반영)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>스마트도시과</strong></td>
+                    <td>스마트시티 기획 등</td>
+                    <td><strong>'데이터기반 행정 및 활성화'</strong> 사무 명문화(제16호)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>미래도시과</strong></td>
+                    <td>슈퍼성장 공동협의회 운영</td>
+                    <td>해당 단위사무 삭제(사업 종료 반영)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>보건소</strong></td>
+                    <td>자살예방 총괄, 일반 진료</td>
+                    <td>자살예방 총괄기획 본청 이관, <strong>달빛어린이병원 지원 및 의료·요양 통합돌봄</strong> 신설</td>
+                  </tr>
+                  <tr>
+                    <td><strong>하천공원관리과</strong></td>
+                    <td>하천 시설 관리</td>
+                    <td><strong>'하천 진출입 차단시설 설치 및 유지·보수'</strong> 사무 신설 (침수안전 강화)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             Ⅳ. 공무원 정원 변동 및 재정 소요 분석
+             ---------------------------------------------------------------------- -->
+        <section class="content-section" id="sec-4">
+          <div class="section-header">
+            <h2 class="section-title">Ⅳ. 공무원 정원 변동 및 재정 소요 분석</h2>
+            <a href="#sec-4" class="section-anchor"><i class="fa-solid fa-link"></i></a>
+          </div>
+
+          <div class="sub-section" id="sec-4-1">
+            <h3 class="sub-title">1. 정원 총괄 증감 현황</h3>
+            <p class="content-para">
+              남양주시 지방공무원 총 정원은 종전 <strong>2,436명에서 2,487명으로 51명(2.09%) 증원</strong>됩니다. 이번 증원은 집행기관에만 전액 배정되었으며 의회사무국(40명)은 변동이 없습니다.
+            </p>
+          </div>
+
+          <div class="sub-section" id="sec-4-2">
+            <h3 class="sub-title">2. 직급별 정원 변동 상세표</h3>
+            <div class="table-responsive">
+              <table class="wiki-table">
+                <thead>
+                  <tr>
+                    <th>직급 구분</th>
+                    <th class="text-right">현행 정원</th>
+                    <th class="text-center">증감(명)</th>
+                    <th class="text-right">개편 정원</th>
+                    <th>주요 증원 배경 및 배정 내용</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="background: var(--bg-surface-secondary); font-weight: 700;">
+                    <td>총  계</td>
+                    <td class="text-right">2,436명</td>
+                    <td class="text-center"><span class="badge-plus">+51명</span></td>
+                    <td class="text-right">2,487명</td>
+                    <td>일반직 6급 이하 100% 실무인력 증원</td>
+                  </tr>
+                  <tr>
+                    <td>정무직 (시장)</td>
+                    <td class="text-right">1명</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">1명</td>
+                    <td>변동 없음</td>
+                  </tr>
+                  <tr>
+                    <td>2급 (부시장)</td>
+                    <td class="text-right">1명</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">1명</td>
+                    <td>변동 없음</td>
+                  </tr>
+                  <tr>
+                    <td>3·4급 / 4급</td>
+                    <td class="text-right">24명</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">24명</td>
+                    <td>변동 없음 (한시정원 1명 기한연장)</td>
+                  </tr>
+                  <tr>
+                    <td>5급 (사무관)</td>
+                    <td class="text-right">108명</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">108명</td>
+                    <td>과장급 정원 동일 유지</td>
+                  </tr>
+                  <tr>
+                    <td><strong>6급 (팀장/주무관)</strong></td>
+                    <td class="text-right">518명</td>
+                    <td class="text-center"><span class="badge-plus">+5명</span></td>
+                    <td class="text-right"><strong>523명</strong></td>
+                    <td>신설 과(시민주권과) 및 격무부서 중간 실무책임 보강</td>
+                  </tr>
+                  <tr>
+                    <td><strong>7급 (주무관)</strong></td>
+                    <td class="text-right">665명</td>
+                    <td class="text-center"><span class="badge-plus">+18명</span></td>
+                    <td class="text-right"><strong>683명</strong></td>
+                    <td>사업 추진 핵심 실무인력(행정, 사회복지, 시설 등) 확충</td>
+                  </tr>
+                  <tr>
+                    <td><strong>8급 (주무관)</strong></td>
+                    <td class="text-right">566명</td>
+                    <td class="text-center"><span class="badge-plus">+28명</span></td>
+                    <td class="text-right"><strong>594명</strong></td>
+                    <td>현장 민원 및 대민 집행 실무인력 집중 증원</td>
+                  </tr>
+                  <tr>
+                    <td>9급 (주무관)</td>
+                    <td class="text-right">506명</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">506명</td>
+                    <td>총수 유지 (직렬 간 미세 정원 조정)</td>
+                  </tr>
+                  <tr>
+                    <td>기타 (연구·지도·별정)</td>
+                    <td class="text-right">47명</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">47명</td>
+                    <td>전문경력관 1, 별정직 2, 연구직 8, 지도직 36 유지</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="sub-section" id="sec-4-3">
+            <h3 class="sub-title">3. 정원관리기관별 배분 내역</h3>
+            <div class="table-responsive">
+              <table class="wiki-table">
+                <thead>
+                  <tr>
+                    <th>관리기관</th>
+                    <th class="text-right">현행 정원</th>
+                    <th class="text-center">증감(명)</th>
+                    <th class="text-right">조정 정원</th>
+                    <th>배분 특징</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>본  청</strong></td>
+                    <td class="text-right">1,194명</td>
+                    <td class="text-center"><span class="badge-plus">+29명</span></td>
+                    <td class="text-right"><strong>1,223명</strong></td>
+                    <td>시민주권과 신설, 아파트과 통합 및 본청 격무부서 보강</td>
+                  </tr>
+                  <tr>
+                    <td><strong>직속기관</strong> (보건소 등)</td>
+                    <td class="text-right">224명</td>
+                    <td class="text-center"><span class="badge-plus">+3명</span></td>
+                    <td class="text-right"><strong>227명</strong></td>
+                    <td>달빛어린이병원 지원, 의료·요양 통합돌봄 인력</td>
+                  </tr>
+                  <tr>
+                    <td><strong>사업소</strong> (상하수도 등)</td>
+                    <td class="text-right">288명</td>
+                    <td class="text-center"><span class="badge-plus">+1명</span></td>
+                    <td class="text-right"><strong>289명</strong></td>
+                    <td>하천 진출입 차단시설 안전관리 인력</td>
+                  </tr>
+                  <tr>
+                    <td><strong>읍·면·동</strong> (행정복지센터)</td>
+                    <td class="text-right">690명</td>
+                    <td class="text-center"><span class="badge-plus">+18명</span></td>
+                    <td class="text-right"><strong>708명</strong></td>
+                    <td>행정복지센터 및 읍면동 현장 대민행정·복지 인력 대폭 증원</td>
+                  </tr>
+                  <tr>
+                    <td><strong>의회사무국</strong></td>
+                    <td class="text-right">40명</td>
+                    <td class="text-center">-</td>
+                    <td class="text-right">40명</td>
+                    <td>변동 없음</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="sub-section" id="sec-4-4">
+            <h3 class="sub-title">4. 재정 소요액(비용추계) 및 한시정원 연장</h3>
+            <div class="callout-box warning">
+              <div class="callout-title"><i class="fa-solid fa-coins"></i> 1년간 인건비 추가 소요액: 총 3,194백만 원 (약 31.94억 원)</div>
+              <ul class="official-list" style="margin-top: 8px;">
+                <li class="level-1"><strong>6급 (5명):</strong> 440백만 원 (1인당 평균 약 8,800만 원)</li>
+                <li class="level-1"><strong>7급 (18명):</strong> 1,231백만 원 (1인당 평균 약 6,838만 원)</li>
+                <li class="level-1"><strong>8급 (28명):</strong> 1,523백만 원 (1인당 평균 약 5,439만 원)</li>
+              </ul>
+              <small style="color: var(--text-muted);">* 직급별 평균 호봉 및 법정 수당, 기관 부담금을 종합 반영한 1년 소요액 기준임</small>
+            </div>
+
+            <div class="callout-box info" style="margin-top: 14px;">
+              <div class="callout-title"><i class="fa-solid fa-hourglass-half"></i> 미래도시추진단 4급 한시정원 존속기한 연장</div>
+              <p class="content-para" style="margin-bottom: 0;">
+                • 직급: 미래도시추진단 미래도시과 일반직 4급(지방서기관 또는 지방과학기술서기관) 1명<br>
+                • 운영시한: 당초 2027. 1. 1. ➔ <strong>2030. 1. 1.까지 (3년간 추가 연장)</strong><br>
+                • 연장 사유: 왕숙신도시 등 3기 신도시 조성 및 첨단 전략산업 기반 구축 등 대규모 중장기 국책·시정 프로젝트의 연속성 보장
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             Ⅴ. 사무위임 및 사무전결 개편
+             ---------------------------------------------------------------------- -->
+        <section class="content-section" id="sec-5">
+          <div class="section-header">
+            <h2 class="section-title">Ⅴ. 사무위임 및 사무전결처리 규칙 개편</h2>
+            <a href="#sec-5" class="section-anchor"><i class="fa-solid fa-link"></i></a>
+          </div>
+
+          <div class="sub-section" id="sec-5-1">
+            <h3 class="sub-title">1. 사무위임 조례 개정 (읍·면·동장 권한 정비)</h3>
+            <ul class="official-list">
+              <li class="level-1"><strong>위험수목 관리 위임사무:</strong> 단위사무 명칭에서 불필요한 '8272 등' 예시 문구를 삭제하여 법정 명칭으로 정비</li>
+              <li class="level-1"><strong>개발제한구역(GB) 불법행위 단속 본청 일원화:</strong> 행정복지센터 위임사무 중 제17호(불법단속 및 시정명령 권한)를 삭제하고 본청 건축관리과로 일원화하되, 제15호(행위허가/신고)의 하위 부대 처분권한(이행강제금 부과, 과태료)으로 조항을 재편</li>
+            </ul>
+          </div>
+
+          <div class="sub-section" id="sec-5-2">
+            <h3 class="sub-title">2. 사무전결처리 규칙 개편 (전결권 합리적 재배분)</h3>
+            <p class="content-para">
+              신설된 '시민주권과'의 신규 단위사무와 '아파트과'로 이관된 공동주택 관리·감사 사무의 전결권자(주무관 ➔ 팀장 ➔ 과장 ➔ 국장)를 명확히 규정하여 결재 단계 축소 및 신속한 행정처리를 도모했습니다.
+            </p>
+          </div>
+        </section>
+
+        <!-- ----------------------------------------------------------------------
+             Ⅵ. 일정 및 향후 추진 계획
+             ---------------------------------------------------------------------- -->
+        <section class="content-section" id="sec-6">
+          <div class="section-header">
+            <h2 class="section-title">Ⅵ. 입법예고 일정 및 향후 추진 계획</h2>
+            <a href="#sec-6" class="section-anchor"><i class="fa-solid fa-link"></i></a>
+          </div>
+
+          <div class="sub-section" id="sec-6-1">
+            <h3 class="sub-title">1. 향후 5단계 추진 로드맵</h3>
+            <div class="table-responsive">
+              <table class="wiki-table">
+                <thead>
+                  <tr>
+                    <th>단계</th>
+                    <th>일 정</th>
+                    <th>추진 내용</th>
+                    <th>주관/협조</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center font-bold">1단계</td>
+                    <td>2026. 9. 17. ~ 10. 7.</td>
+                    <td>자치법규안 입법예고 및 시민 의견 수렴 (20일간)</td>
+                    <td>정책기획과</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center font-bold">2단계</td>
+                    <td>2026. 10월 초순</td>
+                    <td>접수된 시민·부서 의견 검토 및 개정안 최종 보완</td>
+                    <td>정책기획과</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center font-bold">3단계</td>
+                    <td>2026. 10월 중순</td>
+                    <td>조례규칙심의회 상정 및 심의·의결</td>
+                    <td>의회법무과</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center font-bold">4단계</td>
+                    <td>2026. 10월~11월</td>
+                    <td>남양주시의회 정례회 상정 및 조례안 심사·의결</td>
+                    <td>남양주시의회</td>
+                  </tr>
+                  <tr>
+                    <td class="text-center font-bold">5단계</td>
+                    <td>2026. 하반기 정기인사일</td>
+                    <td>조례·규칙 공포 및 조직개편에 따른 인사발령 <strong>(전면 시행)</strong></td>
+                    <td>인사과</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="sub-section" id="sec-6-2">
+            <h3 class="sub-title">2. 의견 제출 안내</h3>
+            <div class="callout-box info">
+              <p class="content-para" style="margin-bottom: 0;">
+                <strong>• 제출 기한:</strong> 2026년 10월 7일(수)까지<br>
+                <strong>• 제출 방법:</strong> 서면, 우편, 전자메일 (정책기획과 지정 메일)<br>
+                <strong>• 문의처:</strong> 남양주시청 정책기획과 조직관리팀 (☎ 031-590-8933, 8507)
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </main>
+
+    <!-- --------------------------------------------------------------------------
+         우측 미니 목차 사이드바 (Desktop TOC)
+         -------------------------------------------------------------------------- -->
+    <aside class="toc-sidebar" aria-label="문서 빠른 목차">
+      <div class="toc-title">목차 (Contents)</div>
+      <ul class="toc-nav-list" id="tocNavList">
+        <li><a href="#dashboardSection" class="toc-link">핵심 요약 대시보드</a></li>
+        <li><a href="#sec-1" class="toc-link">Ⅰ. 추진 배경 및 개요</a></li>
+        <li><a href="#sec-2" class="toc-link">Ⅱ. 자치법규 개정안 총괄</a></li>
+        <li><a href="#sec-3" class="toc-link">Ⅲ. 기구 및 기능 개편 분석</a></li>
+        <li><a href="#sec-4" class="toc-link">Ⅳ. 정원 변동 및 재정 분석</a></li>
+        <li><a href="#sec-5" class="toc-link">Ⅴ. 사무위임 &amp; 전결 개편</a></li>
+        <li><a href="#sec-6" class="toc-link">Ⅵ. 입법예고 일정 &amp; 절차</a></li>
+      </ul>
+    </aside>
+
+  </div>
+
+  <!-- ==========================================================================
+       3. 실시간 통합 검색 모달 (Ctrl+K / Instant Search)
+       ========================================================================== -->
+  <div class="search-modal-overlay" id="searchModalOverlay">
+    <div class="search-modal" role="dialog" aria-modal="true" aria-labelledby="searchField">
+      <div class="search-input-header">
+        <i class="fa-solid fa-magnifying-glass search-input-icon"></i>
+        <input type="text" id="searchField" class="search-input-field" placeholder="조례명, 부서명, 직급, 주요 키워드 실시간 검색..." autocomplete="off">
+        <button class="search-close-btn" id="searchCloseBtn" aria-label="닫기">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- 카테고리 필터 칩 -->
+      <div class="search-filter-bar">
+        <button class="filter-chip active" data-filter="all">전체</button>
+        <button class="filter-chip" data-filter="기구개편">기구개편</button>
+        <button class="filter-chip" data-filter="정원변동">정원변동</button>
+        <button class="filter-chip" data-filter="사무위임">사무위임·전결</button>
+        <button class="filter-chip" data-filter="자치법규">조례·규칙</button>
+      </div>
+
+      <!-- 실시간 검색 결과 리스트 -->
+      <div class="search-results-list" id="searchResultsList">
+        <div class="search-empty-state">
+          <i class="fa-solid fa-keyboard" style="font-size: 32px; margin-bottom: 12px; color: var(--text-muted);"></i>
+          <p>검색어를 입력하시면 관련 섹션과 조례 조항을 실시간으로 안내합니다.</p>
+          <small style="color: var(--text-muted);">예: 시민주권과, 아파트과, 51명, 비용추계, 한시정원</small>
+        </div>
+      </div>
+
+      <div class="search-footer">
+        <span>선택: <kbd class="search-kbd">Enter</kbd> / 이동: <kbd class="search-kbd">↑</kbd><kbd class="search-kbd">↓</kbd></span>
+        <span>닫기: <kbd class="search-kbd">ESC</kbd></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       4. 모바일 하단 플로팅 퀵 액션바
+       ========================================================================== -->
+  <nav class="mobile-bottom-bar" aria-label="모바일 하단 퀵 내비게이션">
+    <button class="mobile-nav-btn" id="mobileMenuBtn">
+      <i class="fa-solid fa-bars-staggered"></i>
+      <span>목차 트리</span>
+    </button>
+    <button class="mobile-nav-btn" id="mobileSearchQuickBtn">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span>실시간검색</span>
+    </button>
+    <button class="mobile-nav-btn" id="mobileFontQuickBtn">
+      <i class="fa-solid fa-font"></i>
+      <span>글자크기</span>
+    </button>
+    <button class="mobile-nav-btn" id="mobileSummaryBtn">
+      <i class="fa-solid fa-sparkles"></i>
+      <span>핵심요약</span>
+    </button>
+    <button class="mobile-nav-btn" id="mobileTopBtn">
+      <i class="fa-solid fa-arrow-up"></i>
+      <span>맨위로</span>
+    </button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
