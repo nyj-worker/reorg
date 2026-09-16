@@ -232,8 +232,40 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --------------------------------------------------------------------------
-  // 3. 모바일 사이드바 드로어 제어
+  // 3. 사이드바 제어: 데스크탑 크기 조절(리사이즈), 접기/펼치기 & 모바일 드로어
   // --------------------------------------------------------------------------
+  const sidebarResizer = document.getElementById('sidebarResizer');
+  const sidebarCollapseBtn = document.getElementById('sidebarCollapseBtn');
+  const sidebarExpandTab = document.getElementById('sidebarExpandTab');
+
+  const DEFAULT_SIDEBAR_WIDTH = 290;
+  const MIN_SIDEBAR_WIDTH = 200;
+  const MAX_SIDEBAR_WIDTH = 480;
+
+  // 1) 데스크탑 사이드바 너비 초기화 및 복원
+  let savedSidebarWidth = parseInt(localStorage.getItem('nyj_wiki_sidebar_width'), 10);
+  if (!savedSidebarWidth || isNaN(savedSidebarWidth) || savedSidebarWidth < MIN_SIDEBAR_WIDTH || savedSidebarWidth > MAX_SIDEBAR_WIDTH) {
+    savedSidebarWidth = DEFAULT_SIDEBAR_WIDTH;
+  }
+  applySidebarWidth(savedSidebarWidth);
+
+  function applySidebarWidth(width) {
+    document.documentElement.style.setProperty('--sidebar-width', `${width}px`);
+  }
+
+  // 2) 데스크탑 사이드바 접힘 상태 초기화 및 복원
+  const savedCollapsedState = localStorage.getItem('nyj_wiki_sidebar_collapsed') === 'true';
+  if (savedCollapsedState && window.innerWidth > 768) {
+    sidebarNav.classList.add('collapsed');
+  }
+
+  function toggleDesktopSidebar() {
+    const isCollapsed = sidebarNav.classList.toggle('collapsed');
+    localStorage.setItem('nyj_wiki_sidebar_collapsed', isCollapsed ? 'true' : 'false');
+    showToast(isCollapsed ? '사이드바가 접혔습니다 (Alt+S로 펼치기)' : '사이드바가 펼쳐졌습니다');
+  }
+
+  // 3) 모바일 사이드바 드로어 제어
   function openMobileSidebar() {
     sidebarNav.classList.add('open');
     sidebarOverlay.classList.add('active');
@@ -246,13 +278,91 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
+  // 헤더 햄버거 메뉴 버튼: 모바일/데스크탑 환경 자동 분기
   if (sidebarToggleBtn) {
     sidebarToggleBtn.addEventListener('click', () => {
-      if (sidebarNav.classList.contains('open')) {
-        closeMobileSidebar();
+      if (window.innerWidth <= 768) {
+        if (sidebarNav.classList.contains('open')) {
+          closeMobileSidebar();
+        } else {
+          openMobileSidebar();
+        }
       } else {
-        openMobileSidebar();
+        toggleDesktopSidebar();
       }
+    });
+  }
+
+  // 사이드바 상단 접기 버튼 [ < ]
+  if (sidebarCollapseBtn) {
+    sidebarCollapseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (window.innerWidth > 768) {
+        toggleDesktopSidebar();
+      } else {
+        closeMobileSidebar();
+      }
+    });
+  }
+
+  // 접힌 상태에서 복귀용 플로팅 탭 [ > ]
+  if (sidebarExpandTab) {
+    sidebarExpandTab.addEventListener('click', () => {
+      if (sidebarNav.classList.contains('collapsed')) {
+        toggleDesktopSidebar();
+      }
+    });
+  }
+
+  // 단축키 Alt + S 로 사이드바 원클릭 접기/펼치기
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey && (e.key === 's' || e.key === 'S' || e.code === 'KeyS')) {
+      e.preventDefault();
+      if (window.innerWidth <= 768) {
+        if (sidebarNav.classList.contains('open')) {
+          closeMobileSidebar();
+        } else {
+          openMobileSidebar();
+        }
+      } else {
+        toggleDesktopSidebar();
+      }
+    }
+  });
+
+  // 4) 마우스 드래그 사이드바 크기 조절 (Resizable Drag)
+  if (sidebarResizer) {
+    let isResizing = false;
+
+    sidebarResizer.addEventListener('mousedown', (e) => {
+      if (window.innerWidth <= 768) return;
+      e.preventDefault();
+      isResizing = true;
+      document.body.classList.add('resizing-sidebar');
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!isResizing) return;
+      const newWidth = Math.min(MAX_SIDEBAR_WIDTH, Math.max(MIN_SIDEBAR_WIDTH, e.clientX));
+      applySidebarWidth(newWidth);
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (isResizing) {
+        isResizing = false;
+        document.body.classList.remove('resizing-sidebar');
+        const currentWidth = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--sidebar-width'), 10);
+        if (currentWidth) {
+          localStorage.setItem('nyj_wiki_sidebar_width', currentWidth);
+        }
+      }
+    });
+
+    // 리사이즈 핸들 더블클릭 시 기본 너비(290px)로 즉시 복원
+    sidebarResizer.addEventListener('dblclick', () => {
+      applySidebarWidth(DEFAULT_SIDEBAR_WIDTH);
+      localStorage.setItem('nyj_wiki_sidebar_width', DEFAULT_SIDEBAR_WIDTH);
+      showToast(`사이드바 너비가 기본값(${DEFAULT_SIDEBAR_WIDTH}px)으로 초기화되었습니다.`);
     });
   }
 
@@ -529,8 +639,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const fontResetAllBtn = document.getElementById('fontResetAllBtn');
   const mobileFontQuickBtn = document.getElementById('mobileFontQuickBtn');
 
-  // 현재 글자 크기 배율 (기본 1.0 = 100%, 범위 0.75 ~ 1.50)
-  let currentFontScale = parseFloat(localStorage.getItem('nyj_wiki_font_scale')) || 1.0;
+  // 현재 글자 크기 배율 (기본 1.25 = 125%, 범위 0.75 ~ 1.50)
+  let currentFontScale = parseFloat(localStorage.getItem('nyj_wiki_font_scale_v2')) || 1.25;
   let currentLineHeight = parseFloat(localStorage.getItem('nyj_wiki_line_height')) || 1.72;
 
   // 초기 폰트 크기 및 줄간격 적용
@@ -563,7 +673,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 로컬 스토리지에 저장
-    localStorage.setItem('nyj_wiki_font_scale', scale);
+    localStorage.setItem('nyj_wiki_font_scale_v2', scale);
 
     if (showToastMessage) {
       showToast(`글자 크기: ${percent}%`);
@@ -678,9 +788,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // 전체 초기화
   if (fontResetAllBtn) {
     fontResetAllBtn.addEventListener('click', () => {
-      applyFontScale(1.0, false);
-      applyLineHeight(1.65, false);
-      showToast('글자 크기와 줄 간격이 기본값(100%)으로 초기화되었습니다.');
+      applyFontScale(1.25, false);
+      applyLineHeight(1.72, false);
+      showToast('글자 크기와 줄 간격이 기본값(125%)으로 초기화되었습니다.');
     });
   }
 

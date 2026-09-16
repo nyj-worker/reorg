@@ -46,7 +46,7 @@
 
   --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans KR', sans-serif;
   --font-size-base: 16px;
-  --font-scale: 1;
+  --font-scale: 1.25;
   --line-height-base: 1.72;
   --header-height: 64px;
   --sidebar-width: 290px;
@@ -167,20 +167,21 @@ button {
 }
 
 .menu-toggle-btn {
-  display: none;
+  display: flex;
   width: 40px;
   height: 40px;
   border-radius: var(--radius-sm);
-  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 18px;
   color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
 .menu-toggle-btn:hover {
   background-color: var(--bg-surface-secondary);
-  color: var(--text-primary);
+  color: var(--color-primary);
 }
 
 .brand-logo {
@@ -559,25 +560,133 @@ button {
    -------------------------------------------------------------------------- */
 .sidebar {
   width: var(--sidebar-width);
+  min-width: 0;
   height: calc(100vh - var(--header-height));
   position: sticky;
   top: var(--header-height);
   background-color: var(--bg-sidebar);
   border-right: 1px solid var(--border-color);
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
-  transition: transform var(--transition-normal);
+  transition: width 0.24s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, transform var(--transition-normal);
   z-index: 900;
 }
 
+/* 데스크탑 사이드바 접힘 상태 (Collapsed) */
+.sidebar.collapsed {
+  width: 0 !important;
+  min-width: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+  border-right: none;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+/* 사이드바 드래그 리사이즈 핸들 */
+.sidebar-resizer {
+  width: 8px;
+  margin-left: -4px;
+  margin-right: -4px;
+  height: calc(100vh - var(--header-height));
+  position: sticky;
+  top: var(--header-height);
+  cursor: col-resize;
+  z-index: 920;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transition: background-color var(--transition-fast);
+}
+
+.sidebar-resizer::after {
+  content: "";
+  width: 2px;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color var(--transition-fast);
+}
+
+.sidebar-resizer:hover::after,
+body.resizing-sidebar .sidebar-resizer::after {
+  background-color: var(--color-primary);
+  box-shadow: 0 0 8px rgba(2, 132, 199, 0.6);
+}
+
+.sidebar.collapsed + .sidebar-resizer {
+  display: none !important;
+}
+
+/* 사이드바 리사이즈 중 전역 커서 및 텍스트 선택 방지 */
+body.resizing-sidebar {
+  cursor: col-resize !important;
+  user-select: none !important;
+}
+
+body.resizing-sidebar * {
+  user-select: none !important;
+  cursor: col-resize !important;
+}
+
+/* 드래그 중에는 부드러운 반응을 위해 transition 일시 해제 */
+body.resizing-sidebar .sidebar {
+  transition: none !important;
+}
+
+/* 사이드바 접힘 시 나타나는 화면 좌측 복귀 플로팅 탭 */
+.sidebar-expand-tab {
+  position: fixed;
+  top: calc(var(--header-height) + 16px);
+  left: 0;
+  z-index: 890;
+  background: var(--bg-surface);
+  color: var(--color-primary);
+  border: 1px solid var(--border-color);
+  border-left: none;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 8px 12px 8px 8px;
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-fast);
+  transform: translateX(-4px);
+}
+
+.sidebar-expand-tab:hover {
+  transform: translateX(0);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+/* 사이드바가 접혔을 때 플로팅 탭 표시 */
+.sidebar.collapsed ~ .sidebar-expand-tab {
+  display: flex;
+  animation: slideInTab 0.25s ease forwards;
+}
+
+@keyframes slideInTab {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(-4px); }
+}
+
 .sidebar-header {
-  padding: 16px 20px;
+  padding: 16px 18px;
   border-bottom: 1px solid var(--border-light);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  white-space: nowrap;
 }
 
 .sidebar-title {
@@ -590,20 +699,33 @@ button {
 
 .sidebar-actions {
   display: flex;
-  gap: 6px;
+  align-items: center;
+  gap: 4px;
 }
 
 .tree-action-btn {
   font-size: 0.75rem;
-  padding: 2px 6px;
+  padding: 3px 6px;
   border-radius: 4px;
   background-color: var(--bg-surface-secondary);
   color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
 }
 
 .tree-action-btn:hover {
   background-color: var(--color-primary-light);
   color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.collapse-toggle-btn {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
 
 /* 계층형 트리 컴포넌트 */
@@ -1629,6 +1751,12 @@ p.content-para {
     min-width: 44px;
     font-size: 0.78rem;
     padding: 2px 4px;
+  }
+
+  .sidebar-resizer,
+  .sidebar-expand-tab,
+  .collapse-toggle-btn {
+    display: none !important;
   }
 
   .sidebar {

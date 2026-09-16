@@ -52,7 +52,7 @@
         </button>
         <button class="font-size-display-btn" id="fontSizePopoverToggleBtn" title="글자 크기 및 줄간격 상세 설정 열기" aria-label="글자 크기 상세 설정">
           <i class="fa-solid fa-font"></i>
-          <span id="fontSizeDisplay">100%</span>
+          <span id="fontSizeDisplay">125%</span>
         </button>
         <button class="font-step-btn" id="fontIncreaseBtn" title="글자 확대 (A+)" aria-label="글자 확대">
           <i class="fa-solid fa-plus"></i>
@@ -73,10 +73,10 @@
               <label class="popover-label">글자 크기 프리셋</label>
               <div class="font-preset-grid">
                 <button class="preset-btn" data-scale="0.85">85% 작게</button>
-                <button class="preset-btn active" data-scale="1.0">100% 보통</button>
+                <button class="preset-btn" data-scale="1.0">100% 보통</button>
                 <button class="preset-btn" data-scale="1.15">115% 크게</button>
-                <button class="preset-btn" data-scale="1.30">130% 더크게</button>
-                <button class="preset-btn" data-scale="1.45">145% 최대</button>
+                <button class="preset-btn active" data-scale="1.25">125% 기본</button>
+                <button class="preset-btn" data-scale="1.40">140% 최대</button>
               </div>
             </div>
 
@@ -84,9 +84,9 @@
             <div class="popover-section">
               <div class="slider-label-row">
                 <label class="popover-label" for="fontSizeSlider">세밀 조절 (75% ~ 150%)</label>
-                <span class="slider-val-badge" id="sliderValueBadge">100%</span>
+                <span class="slider-val-badge" id="sliderValueBadge">125%</span>
               </div>
-              <input type="range" id="fontSizeSlider" min="75" max="150" step="5" value="100" class="font-slider">
+              <input type="range" id="fontSizeSlider" min="75" max="150" step="5" value="125" class="font-slider">
             </div>
 
             <!-- 줄 간격(행간) 조절 -->
@@ -135,6 +135,9 @@
         <div class="sidebar-actions">
           <button class="tree-action-btn" id="expandAllTreeBtn" title="전체 펼치기">모두 펼침</button>
           <button class="tree-action-btn" id="collapseAllTreeBtn" title="전체 접기">모두 접음</button>
+          <button class="tree-action-btn collapse-toggle-btn" id="sidebarCollapseBtn" title="사이드바 접기 (Alt+S)" aria-label="사이드바 접기">
+            <i class="fa-solid fa-angles-left"></i>
+          </button>
         </div>
       </div>
 
@@ -243,6 +246,15 @@
         </div>
       </nav>
     </aside>
+
+    <!-- 사이드바 드래그 리사이즈 핸들 (Desktop Resizer) -->
+    <div class="sidebar-resizer" id="sidebarResizer" title="드래그하여 크기 조절 (더블클릭 시 기본 너비 복원)" role="separator" aria-orientation="vertical"></div>
+
+    <!-- 사이드바 접힘 시 화면 좌측 복귀 플로팅 탭 -->
+    <button class="sidebar-expand-tab" id="sidebarExpandTab" title="목차 사이드바 펼치기 (Alt+S)" aria-label="사이드바 펼치기">
+      <i class="fa-solid fa-angles-right"></i>
+      <span class="tab-label">목차</span>
+    </button>
 
     <!-- --------------------------------------------------------------------------
          중앙 메인 위키 콘텐츠 아티클
